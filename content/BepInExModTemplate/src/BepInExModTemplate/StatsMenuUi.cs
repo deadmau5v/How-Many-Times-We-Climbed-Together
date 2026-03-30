@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using PEAKLib.UI;
 using PEAKLib.UI.Elements;
 using pworld.Scripts.Extensions;
@@ -205,24 +204,17 @@ internal static class StatsMenuUi
                 _pauseMenuHandler.TransistionToPage(_statsPage, new SetActivePageTransistion());
             });
 
-        PositionOpenButton(parent, _openButton);
+        PositionOpenButton(_openButton);
     }
 
-    private static void PositionOpenButton(Transform parent, PeakMenuButton button)
+    private static void PositionOpenButton(PeakMenuButton button)
     {
-        RectTransform? inviteButtonRect = GetPauseMenuButtonRect("m_inviteButton");
-        if (inviteButtonRect == null)
-        {
-            button.SetPosition(new Vector2(205f, -352f));
-            return;
-        }
-
         RectTransform rectTransform = button.RectTransform;
-        rectTransform.anchorMin = inviteButtonRect.anchorMin;
-        rectTransform.anchorMax = inviteButtonRect.anchorMax;
-        rectTransform.pivot = inviteButtonRect.pivot;
-        rectTransform.sizeDelta = inviteButtonRect.sizeDelta;
-        rectTransform.anchoredPosition = inviteButtonRect.anchoredPosition + new Vector2(0f, -60f);
+        rectTransform.anchorMin = new Vector2(0.5f, 0f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0f);
+        rectTransform.pivot = new Vector2(0.5f, 0f);
+        rectTransform.sizeDelta = new Vector2(MenuAPI.OPTIONS_WIDTH, rectTransform.sizeDelta.y);
+        rectTransform.anchoredPosition = new Vector2(0f, 36f);
     }
 
     private static void RefreshPage()
@@ -320,12 +312,15 @@ internal static class StatsMenuUi
         TextMeshProUGUI countText = CreateText(
             row.transform,
             "Count",
-            30,
+            24,
             FontStyles.Bold,
             TextAlignmentOptions.Right
         );
-        ConfigureTopText(countText.rectTransform, new Vector2(1040f, -10f), new Vector2(-24f, -58f));
-        countText.text = count.ToString();
+        ConfigureTopText(countText.rectTransform, new Vector2(820f, -12f), new Vector2(-24f, -58f));
+        countText.text = HmtcLocalization.FormatClimbCount(count);
+        countText.enableAutoSizing = true;
+        countText.fontSizeMin = 18f;
+        countText.fontSizeMax = 24f;
         ApplyFont(countText, preferCjk: HmtcLocalization.IsCjkLanguage());
 
         return row;
@@ -341,19 +336,6 @@ internal static class StatsMenuUi
 
         if (_backButton != null)
             ApplyFont(_backButton.Text, preferCjk: HmtcLocalization.IsCjkLanguage());
-    }
-
-    private static RectTransform? GetPauseMenuButtonRect(string fieldName)
-    {
-        if (_parentPage == null)
-            return null;
-
-        FieldInfo? field = typeof(PauseMenuMainPage).GetField(
-            fieldName,
-            BindingFlags.Instance | BindingFlags.NonPublic
-        );
-        Button? button = field?.GetValue(_parentPage) as Button;
-        return button?.GetComponent<RectTransform>();
     }
 
     private static void OnLanguageChanged()

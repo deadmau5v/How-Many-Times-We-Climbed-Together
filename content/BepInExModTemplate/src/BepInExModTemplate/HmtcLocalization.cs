@@ -37,21 +37,21 @@ internal static class HmtcLocalization
     internal static string GetStatsTitle() =>
         CurrentLanguage switch
         {
-            Language.French => "Statistiques des ascensions ensemble",
-            Language.Italian => "Statistiche delle scalate insieme",
-            Language.German => "Gemeinsame Kletterstatistik",
-            Language.SpanishSpain => "Estadisticas de escalada juntos",
-            Language.SpanishLatam => "Estadisticas de escalada juntos",
-            Language.BRPortuguese => "Estatisticas de escalada juntos",
-            Language.Russian => "Statistika sovmestnykh voskhozhdeniy",
-            Language.Ukrainian => "Statystyka spilnykh skhodzhen",
-            Language.SimplifiedChinese => "\u4E00\u8D77\u6500\u767B\u7EDF\u8BA1",
-            Language.TraditionalChinese => "\u4E00\u8D77\u6500\u767B\u7D71\u8A08",
-            Language.Japanese => "\u4E00\u7DD2\u306B\u767B\u3063\u305F\u56DE\u6570",
-            Language.Korean => "\uD568\uAED8 \uB4F1\uBC18\uD55C \uD69F\uC218",
-            Language.Polish => "Statystyki wspolnej wspinaczki",
-            Language.Turkish => "Birlikte tirmanis istatistikleri",
-            _ => "Climbing Together Stats",
+            Language.French => "Avec qui ai-je deja grimpe ?",
+            Language.Italian => "Con chi ho gia scalato?",
+            Language.German => "Mit wem bin ich schon geklettert?",
+            Language.SpanishSpain => "Con quien ya he escalado?",
+            Language.SpanishLatam => "Con quien ya he escalado?",
+            Language.BRPortuguese => "Com quem eu ja escalei?",
+            Language.Russian => "S kem ya uzhe podnimalsya?",
+            Language.Ukrainian => "Z kym ya vzhe pidimavsya?",
+            Language.SimplifiedChinese => "\u6211\u548C\u8C01\u4E00\u8D77\u722C\u8FC7\uFF1F",
+            Language.TraditionalChinese => "\u6211\u548C\u8AB0\u4E00\u8D77\u722C\u904E\uFF1F",
+            Language.Japanese => "\u8AB0\u3068\u4E00\u7DD2\u306B\u767B\u3063\u305F\uFF1F",
+            Language.Korean => "\uB204\uAD6C\uC640 \uD568\uAED8 \uC62C\uB790\uC744\uAE4C?",
+            Language.Polish => "Z kim juz sie wspinalem?",
+            Language.Turkish => "Kimlerle birlikte tirmandim?",
+            _ => "Who have I climbed with?",
         };
 
     internal static string GetPlayerColumnLabel() =>
@@ -92,6 +92,26 @@ internal static class HmtcLocalization
             Language.Polish => "Razy",
             Language.Turkish => "Kez",
             _ => "Times",
+        };
+
+    internal static string FormatClimbCount(int count) =>
+        CurrentLanguage switch
+        {
+            Language.French => $"Grimpe ensemble {count} fois",
+            Language.Italian => $"Scalato insieme {count} volte",
+            Language.German => $"{count} Mal zusammen geklettert",
+            Language.SpanishSpain => $"Escalamos juntos {count} veces",
+            Language.SpanishLatam => $"Escalamos juntos {count} veces",
+            Language.BRPortuguese => $"Escalamos juntos {count} vez(es)",
+            Language.Russian => $"Vmeste podnimalis {count} raz",
+            Language.Ukrainian => $"Razom pidiimalys {count} raziv",
+            Language.SimplifiedChinese => $"\u4E00\u8D77\u722C\u4E86 {count} \u6B21",
+            Language.TraditionalChinese => $"\u4E00\u8D77\u722C\u4E86 {count} \u6B21",
+            Language.Japanese => $"\u4E00\u7DD2\u306B\u767B\u3063\u305F\u306E\u306F {count} \u56DE",
+            Language.Korean => $"\uD568\uAED8 \uC62C\uB780 \uD69F\uC218 {count}\uD68C",
+            Language.Polish => $"Wspinaliscie sie razem {count} razy",
+            Language.Turkish => $"Birlikte {count} kez tirmandiniz",
+            _ => $"Climbed together {count} time{(count == 1 ? string.Empty : "s")}",
         };
 
     internal static string FormatTrackedPlayers(int count) =>
