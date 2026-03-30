@@ -1,58 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-<!--#if (!no-tutorial) -->
-    <!-- This is the most appropriate target framework for the game's Unity version. -->
-<!--#endif -->
     <TargetFramework>netstandard2.1</TargetFramework>
-<!--#if (!no-tutorial) -->
-    <!-- This is the GUID of your mod. Example: com.github.YourAccount.BepInExTemplate -->
-<!--#endif -->
-    <AssemblyName>_Guid_</AssemblyName>
-<!--#if (!no-tutorial) -->
-    <!-- This is the display name of your mod. Example: BepInEx Template -->
-<!--#endif -->
-    <AssemblyTitle>BepInExModTemplate</AssemblyTitle>
-<!--#if (!no-tutorial) -->
-    <!-- This is the version number of your mod. -->
-<!--#endif -->
+    <AssemblyName>com.github.d5v.HowManyTimesWeClimbedTogether</AssemblyName>
+    <AssemblyTitle>How Many Times We Climbed Together</AssemblyTitle>
     <Version>0.1.0</Version>
   </PropertyGroup>
 
-<!--#if (library) -->
-  <!-- NuGet metadata -->
-  <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <!--
-      TODO: Fill these values. See:
-      https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices
-    -->
-    <PackageId></PackageId>
-    <Description></Description>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="$(SolutionRoot)README.md" Pack="true" PackagePath="/" />
-    <None Include="$(SolutionRoot)icon.png" Pack="true" PackagePath="/" />
-  </ItemGroup>
-
-<!--#endif -->
-<!--#if (!no-tutorial) -->
-  <!--
-  How to include thunderstore mods as dependencies via nuget
-
-  We have already added the windows10ce nuget feed to this project
-  in NuGet.Config so all you need to do is list a dependency like
-  this:
-
-  <ItemGroup>
-    <PackageReference Include="ModTeam-ModName" Version="1.0.0" Private="False"/>
-  </ItemGroup>
-
-  Private="false" will stop it from being copied to the output folder
-  during build. This will cause the mod to be downloaded and its
-  methods will be available at compile time for your code. You'll still
-  need to add it as a dependency in your manifest.json, of course
-  -->
-
-<!--#endif -->
 </Project>

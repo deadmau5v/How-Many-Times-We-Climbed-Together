@@ -6,9 +6,9 @@ repository = "https://thunderstore.io"
 
 [package]
 namespace = "_ts-team_"
-name = "BepInExModTemplate"
-description = "TODO: Fill in short mod description."
-websiteUrl = "" # TODO: Add a link to your mod repository here (optional)
+name = "HowManyTimesWeClimbedTogether"
+description = "Tracks how many times you've climbed together with each player."
+websiteUrl = ""
 containsNsfwContent = false
 
 [package.dependencies]
@@ -20,7 +20,7 @@ readme = "../../README.md"
 outdir = "../../artifacts/thunderstore/"
 
 [[build.copy]]
-source = "../../artifacts/bin/BepInExModTemplate/release/_Guid_.dll"
+source = "../../artifacts/bin/BepInExModTemplate/release/com.github.d5v.HowManyTimesWeClimbedTogether.dll"
 target = "plugins/"
 
 [[build.copy]]
