@@ -14,10 +14,13 @@ internal class SessionTracker
     {
         _dataFilePath = Path.Combine(Paths.ConfigPath, "HowManyTimesWeClimbedTogether.json");
         _records = Load();
+        EnsureDataFileExists();
     }
 
     internal void IncrementSession(string playerId, string playerName)
     {
+        EnsureDataFileExists();
+
         if (_records.TryGetValue(playerId, out var record))
         {
             record.SessionCount++;
@@ -36,22 +39,32 @@ internal class SessionTracker
 
     internal int GetSessionCount(string playerId)
     {
+        EnsureDataFileExists();
         return _records.TryGetValue(playerId, out var record) ? record.SessionCount : 0;
     }
 
     internal string GetLastKnownName(string playerId)
     {
+        EnsureDataFileExists();
         return _records.TryGetValue(playerId, out var record) && !string.IsNullOrWhiteSpace(record.LastKnownName)
             ? record.LastKnownName
             : "";
     }
 
-    internal IReadOnlyDictionary<string, PlayerRecord> GetAllRecords() => _records;
+    internal IReadOnlyDictionary<string, PlayerRecord> GetAllRecords()
+    {
+        EnsureDataFileExists();
+        return _records;
+    }
 
     internal void Save()
     {
         try
         {
+            string? directoryPath = Path.GetDirectoryName(_dataFilePath);
+            if (!string.IsNullOrWhiteSpace(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
             string json = JsonConvert.SerializeObject(_records, Formatting.Indented);
             File.WriteAllText(_dataFilePath, json);
         }
@@ -78,6 +91,14 @@ internal class SessionTracker
         }
 
         return new Dictionary<string, PlayerRecord>();
+    }
+
+    private void EnsureDataFileExists()
+    {
+        if (File.Exists(_dataFilePath))
+            return;
+
+        Save();
     }
 }
 

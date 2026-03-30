@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>com.github.d5v.HowManyTimesWeClimbedTogether</AssemblyName>
     <AssemblyTitle>How Many Times We Climbed Together</AssemblyTitle>
-    <Version>0.1.3</Version>
+    <Version>0.1.6</Version>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 

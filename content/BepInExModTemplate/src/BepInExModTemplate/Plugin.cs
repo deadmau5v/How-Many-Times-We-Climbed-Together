@@ -5,13 +5,14 @@ using BepInEx.Logging;
 using HarmonyLib;
 using PEAKLib.Core;
 using PEAKLib.UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace HowManyTimesWeClimbedTogether;
 
 [BepInDependency(CorePlugin.Id)]
 [BepInDependency(UIPlugin.Id)]
-[BepInPlugin("com.github.d5v.HowManyTimesWeClimbedTogether", "How Many Times We Climbed Together", "0.1.3")]
+[BepInPlugin("com.github.d5v.HowManyTimesWeClimbedTogether", "How Many Times We Climbed Together", "0.1.6")]
 public class Plugin : BaseUnityPlugin
 {
     internal static ManualLogSource Log { get; private set; } = null!;
@@ -76,6 +77,11 @@ public class Plugin : BaseUnityPlugin
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SessionDetector.OnSceneLoaded(scene.name);
+    }
+
+    private void Update()
+    {
+        SessionDetector.Update(SceneManager.GetActiveScene().name);
     }
 
     private void OnDestroy()

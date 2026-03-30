@@ -8,38 +8,52 @@ internal static class SessionDetector
 {
     private const string LobbyScene = "Airport";
 
-    private static bool _wasInLobby;
     private static bool _inExpedition;
     private static readonly HashSet<string> _countedPlayersThisSession = new();
 
-    internal static void OnSceneLoaded(string sceneName)
+    internal static void Update(string sceneName)
     {
         if (sceneName == LobbyScene)
         {
-            _wasInLobby = true;
             _inExpedition = false;
             _countedPlayersThisSession.Clear();
             return;
         }
 
-        if (!_wasInLobby || _inExpedition)
-            return;
-
         if (!PhotonNetwork.InRoom)
+        {
             return;
+        }
 
-        _inExpedition = true;
-        RecordAllCurrentPlayers();
+        if (!_inExpedition)
+        {
+            _inExpedition = true;
+            RecordAllCurrentPlayers();
+            return;
+        }
+
+        if (HasUncountedRemotePlayers())
+            RecordAllCurrentPlayers();
+    }
+
+    internal static void OnSceneLoaded(string sceneName)
+    {
+        Update(sceneName);
     }
 
     private static void RecordAllCurrentPlayers()
     {
         PhotonPlayer[] allPlayers = PhotonNetwork.PlayerList;
+        bool anyCounted = false;
 
         foreach (PhotonPlayer player in allPlayers)
-            TryCountPlayer(player);
+        {
+            if (TryCountPlayer(player))
+                anyCounted = true;
+        }
 
-        Plugin.Tracker.Save();
+        if (anyCounted)
+            Plugin.Tracker.Save();
     }
 
     internal static void OnPlayerJoinedDuringExpedition(PhotonPlayer newPlayer)
@@ -64,6 +78,21 @@ internal static class SessionDetector
 
         Plugin.Tracker.IncrementSession(playerId, playerName);
         return true;
+    }
+
+    private static bool HasUncountedRemotePlayers()
+    {
+        foreach (PhotonPlayer player in PhotonNetwork.PlayerList)
+        {
+            if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                continue;
+
+            string playerId = GetStablePlayerId(player);
+            if (!_countedPlayersThisSession.Contains(playerId))
+                return true;
+        }
+
+        return false;
     }
 
     internal static string GetStablePlayerId(PhotonPlayer player)
