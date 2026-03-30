@@ -29,10 +29,6 @@ target = "plugins/"
 source = "../../CHANGELOG.md"
 target = "/"
 
-[[build.copy]]
-source = "../../images/47abac2fde4a4f3770db9a203d9411a2.png"
-target = "images/"
-
 # The following config options only apply when using TCLI to publish to Thunderstore directly:
 
 [publish]

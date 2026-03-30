@@ -2,7 +2,7 @@
 
 A PEAK mod that remembers how many expeditions you have shared with other players.
 
-![Climb stats screenshot](https://raw.githubusercontent.com/deadmau5v/How-Many-Times-We-Climbed-Together/main/content/BepInExModTemplate/images/47abac2fde4a4f3770db9a203d9411a2.png)
+![Climb stats screenshot](https://i.imgur.com/ybnVkoj.png)
 
 ## Features
 

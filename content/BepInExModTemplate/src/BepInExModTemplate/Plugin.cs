@@ -11,7 +11,7 @@ namespace HowManyTimesWeClimbedTogether;
 
 [BepInDependency(CorePlugin.Id)]
 [BepInDependency(UIPlugin.Id)]
-[BepInPlugin("com.github.d5v.HowManyTimesWeClimbedTogether", "How Many Times We Climbed Together", "0.1.0")]
+[BepInPlugin("com.github.d5v.HowManyTimesWeClimbedTogether", "How Many Times We Climbed Together", "0.1.3")]
 public class Plugin : BaseUnityPlugin
 {
     internal static ManualLogSource Log { get; private set; } = null!;
