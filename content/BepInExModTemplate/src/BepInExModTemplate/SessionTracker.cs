@@ -39,6 +39,13 @@ internal class SessionTracker
         return _records.TryGetValue(playerId, out var record) ? record.SessionCount : 0;
     }
 
+    internal string GetLastKnownName(string playerId)
+    {
+        return _records.TryGetValue(playerId, out var record) && !string.IsNullOrWhiteSpace(record.LastKnownName)
+            ? record.LastKnownName
+            : "";
+    }
+
     internal IReadOnlyDictionary<string, PlayerRecord> GetAllRecords() => _records;
 
     internal void Save()

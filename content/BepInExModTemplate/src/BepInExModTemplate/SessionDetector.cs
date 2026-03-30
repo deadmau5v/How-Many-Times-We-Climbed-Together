@@ -19,7 +19,6 @@ internal static class SessionDetector
             _wasInLobby = true;
             _inExpedition = false;
             _countedPlayersThisSession.Clear();
-            Plugin.Log.LogDebug("Entered lobby (Airport). Session tracking reset.");
             return;
         }
 
@@ -35,15 +34,10 @@ internal static class SessionDetector
 
     private static void RecordAllCurrentPlayers()
     {
-        PhotonPlayer localPlayer = PhotonNetwork.LocalPlayer;
         PhotonPlayer[] allPlayers = PhotonNetwork.PlayerList;
 
-        Plugin.Log.LogInfo($"New expedition started! Room: {PhotonNetwork.CurrentRoom.Name}, Players: {allPlayers.Length}");
-
         foreach (PhotonPlayer player in allPlayers)
-        {
             TryCountPlayer(player);
-        }
 
         Plugin.Tracker.Save();
     }
@@ -63,18 +57,12 @@ internal static class SessionDetector
             return false;
 
         string playerId = GetStablePlayerId(player);
-        string playerName = player.NickName ?? "Unknown";
+        string playerName = GetBestDisplayName(player);
 
         if (!_countedPlayersThisSession.Add(playerId))
-        {
-            Plugin.Log.LogDebug($"  Player {playerName} already counted this session, skipping (reconnect/duplicate).");
             return false;
-        }
 
         Plugin.Tracker.IncrementSession(playerId, playerName);
-        Plugin.Log.LogInfo(
-            $"  Climbed with {playerName} - Total: {Plugin.Tracker.GetSessionCount(playerId)} times"
-        );
         return true;
     }
 
@@ -84,5 +72,21 @@ internal static class SessionDetector
             return player.UserId;
 
         return $"nick:{player.NickName ?? player.ActorNumber.ToString()}";
+    }
+
+    internal static string GetBestDisplayName(PhotonPlayer player)
+    {
+        string playerId = GetStablePlayerId(player);
+        string storedName = Plugin.Tracker.GetLastKnownName(playerId);
+        if (!string.IsNullOrWhiteSpace(storedName))
+            return storedName;
+
+        if (!string.IsNullOrWhiteSpace(player.NickName))
+            return player.NickName;
+
+        if (!string.IsNullOrWhiteSpace(player.UserId))
+            return player.UserId;
+
+        return $"Player {player.ActorNumber}";
     }
 }

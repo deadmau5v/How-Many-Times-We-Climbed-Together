@@ -5,6 +5,12 @@
     <AssemblyName>com.github.d5v.HowManyTimesWeClimbedTogether</AssemblyName>
     <AssemblyTitle>How Many Times We Climbed Together</AssemblyTitle>
     <Version>0.1.0</Version>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\PEAKLib\src\PEAKLib.Core\PEAKLib.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\..\PEAKLib\src\PEAKLib.UI\PEAKLib.UI.csproj" />
+  </ItemGroup>
 
 </Project>

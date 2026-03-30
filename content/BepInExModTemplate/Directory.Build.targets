@@ -20,7 +20,6 @@
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" PrivateAssets="all" />
     <PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.0.*" PrivateAssets="all" />
-    <PackageReference Include="HarmonyX" Version="2.13.0" PrivateAssets="all" />
   </ItemGroup>
 
   <!-- NuGet fallback stripped game references -->
@@ -41,6 +40,7 @@
       Exclude="$(ManagedDir)Mono*.dll;$(ManagedDir)netstandard.dll;$(ManagedDir)System*.dll;$(ManagedDir)mscorlib.dll"
     />
     <Reference Include="@(LocalReferences)" Private="false" />
+    <Reference Include="$(PeakGameRootDir)BepInEx/core/0Harmony.dll" Private="false" />
 <!--#if (!no-tutorial) -->
     <!-- Publicize these assemblies so we can access their internal members -->
 <!--#endif -->

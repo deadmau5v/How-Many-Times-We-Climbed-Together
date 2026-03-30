@@ -20,7 +20,8 @@ internal static class PlayerConnectionLogPatches
         if (count <= 0)
             return;
 
-        string message = $"<color=#AAAAAA>You've climbed with {newPlayer.NickName} {count} time{(count > 1 ? "s" : "")}</color>";
+        string playerName = SessionDetector.GetBestDisplayName(newPlayer);
+        string message = MessageFormatter.BuildClimbedWithMessage(playerName, count);
         __instance.AddMessage(message);
     }
 }
