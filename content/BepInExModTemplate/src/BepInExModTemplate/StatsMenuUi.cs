@@ -98,7 +98,7 @@ internal static class StatsMenuUi
             headerContainer.transform,
             "Title",
             54,
-            FontStyles.Bold,
+            FontStyles.Normal,
             TextAlignmentOptions.Center
         );
         StretchToParent(_titleText.rectTransform);
@@ -131,7 +131,7 @@ internal static class StatsMenuUi
             panel.transform,
             "Summary",
             32,
-            FontStyles.Bold,
+            FontStyles.Normal,
             TextAlignmentOptions.Center
         );
         ConfigureTopText(_summaryText.rectTransform, new Vector2(90f, -18f), new Vector2(-90f, -62f));
@@ -169,7 +169,7 @@ internal static class StatsMenuUi
             panel.transform,
             "Empty",
             30,
-            FontStyles.Bold,
+            FontStyles.Normal,
             TextAlignmentOptions.Center
         );
         _emptyText.color = new Color(0.94f, 0.90f, 0.82f, 0.95f);
@@ -302,7 +302,7 @@ internal static class StatsMenuUi
             row.transform,
             "PlayerName",
             30,
-            FontStyles.Bold,
+            FontStyles.Normal,
             TextAlignmentOptions.Left
         );
         ConfigureTopText(playerText.rectTransform, new Vector2(24f, -10f), new Vector2(-240f, -58f));
@@ -313,7 +313,7 @@ internal static class StatsMenuUi
             row.transform,
             "Count",
             24,
-            FontStyles.Bold,
+            FontStyles.Normal,
             TextAlignmentOptions.Right
         );
         ConfigureTopText(countText.rectTransform, new Vector2(820f, -12f), new Vector2(-24f, -58f));
